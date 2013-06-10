@@ -3395,6 +3395,17 @@ static int mmc_blk_suspend(struct mmc_card *card)
 	return rc;
 }
 
+static void mmc_blk_shutdown(struct mmc_card *card)
+{
+	_mmc_blk_suspend(card);
+}
+
+#ifdef CONFIG_PM
+static int mmc_blk_suspend(struct mmc_card *card)
+{
+	return _mmc_blk_suspend(card);
+}
+
 static int mmc_blk_resume(struct mmc_card *card)
 {
 	struct mmc_blk_data *part_md;
