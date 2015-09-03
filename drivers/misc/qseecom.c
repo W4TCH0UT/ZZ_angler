@@ -4366,7 +4366,6 @@ static int qseecom_create_key(struct qseecom_dev_handle *data,
 		} while (ret == QSEOS_RESULT_FAIL_PENDING_OPERATION);
 
 		qseecom_disable_ice_setup(create_key_req.usage);
-
 		if (ret) {
 			pr_err("Failed to create key: pipe %d, ce %d: %d\n",
 				pipe, ce_hw[i], ret);
