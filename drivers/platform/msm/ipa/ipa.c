@@ -1,4 +1,4 @@
-/* Copyright (c) 2012-2015, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2012-2016, The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -1539,6 +1539,7 @@ int ipa_q6_cleanup(void)
 
 	if (!ipa_ctx->uc_ctx.uc_loaded) {
 		IPAERR("uC is not loaded, won't reset Q6 pipes\n");
+		ipa_dec_client_disable_clks();
 		return 0;
 	}
 
@@ -1550,7 +1551,9 @@ int ipa_q6_cleanup(void)
 				BUG();
 		}
 
-	ipa_ctx->q6_proxy_clk_vote_valid = true;
+	/* set proxy vote before decrement */
+	ipa_proxy_clk_vote();
+	ipa_dec_client_disable_clks();
 	return 0;
 }
 
