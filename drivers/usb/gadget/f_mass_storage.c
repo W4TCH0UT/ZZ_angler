@@ -2889,6 +2889,9 @@ static int create_lun_device(struct fsg_common *common,
 		rc = device_create_file(&curlun->dev, &dev_attr_nofua);
 		if (rc)
 			goto error_luns;
+		rc = device_create_file(&curlun->dev, &dev_attr_cdrom);
+		if (rc)
+			goto error_luns;
 
 		rc = device_create_file(&curlun->dev, &dev_attr_cdrom);
 		if (rc)
